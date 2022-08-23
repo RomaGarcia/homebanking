@@ -86,11 +86,12 @@ public class LoanRestController {
     }
 
     @Transactional
-    @PostMapping ("/web/loanType")
+    @PostMapping ("/api/loansType")
     public ResponseEntity<Object> createLoan(@RequestBody LoanCreateDTO loanCreateDTO)       {
         List<Integer> payments = new ArrayList<>();
         payments.add(loanCreateDTO.getPayment());
         Loan loan= new Loan(loanCreateDTO.getName(), loanCreateDTO.getMaxAmount(), payments);
+        loanRepository.save(loan);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @RequestMapping("/api/loans")

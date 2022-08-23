@@ -14,11 +14,11 @@
           apply: function(){
               axios.post("/api/loansType",{name: this.name, maxAmount: this.maxAmount, payment: this.payment})
               .then(response => {
-                  this.modal.hide();
-                  this.okmodal.show();
+
+                 console.log("creado");
               })
               .catch((error) =>{
-                  this.errorMsg = error.response.data;
+        //          this.errorMsg = error.response.data;
                   this.errorToats.show();
               })
           },
