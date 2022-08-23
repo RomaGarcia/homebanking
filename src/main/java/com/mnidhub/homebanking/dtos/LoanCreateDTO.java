@@ -1,19 +1,21 @@
 package com.mnidhub.homebanking.dtos;
 
+import java.util.List;
+
 public class LoanCreateDTO {
 
     private Long id;
     private String name;
     private Double maxAmount;
-    private int payment;
+    private List<Integer> payments;
 
     public LoanCreateDTO() {
     }
 
-    public LoanCreateDTO(String name, Double MaxAmount, int payment) {
+    public LoanCreateDTO(String name, Double maxAmount, List<Integer> payments) {
         this.name = name;
         this.maxAmount = maxAmount;
-        this.payment = payment;
+        this.payments = payments;
     }
 
     public Long getId() {
@@ -40,11 +42,11 @@ public class LoanCreateDTO {
         this.maxAmount = maxAmount;
     }
 
-    public int getPayment() {
-        return payment;
+    public List<Integer> getPayments() {
+        return payments;
     }
 
-    public void setPayment(int payment) {
-        this.payment = payment;
+    public void setPayments(List<Integer> payments) {
+        this.payments = payments;
     }
 }

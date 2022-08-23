@@ -88,9 +88,8 @@ public class LoanRestController {
     @Transactional
     @PostMapping ("/api/loansType")
     public ResponseEntity<Object> createLoan(@RequestBody LoanCreateDTO loanCreateDTO)       {
-        List<Integer> payments = new ArrayList<>();
-        payments.add(loanCreateDTO.getPayment());
-        Loan loan= new Loan(loanCreateDTO.getName(), loanCreateDTO.getMaxAmount(), payments);
+
+        Loan loan= new Loan(loanCreateDTO.getName(), loanCreateDTO.getMaxAmount(), loanCreateDTO.getPayments());
         loanRepository.save(loan);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

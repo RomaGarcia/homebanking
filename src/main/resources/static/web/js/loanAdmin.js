@@ -4,7 +4,7 @@
 
           name: "",
           payment: 0,
-          paymentsList: [],
+          payments: [],
           errorToats: null,
           errorMsg: null,
           maxAmount: 0,
@@ -12,15 +12,22 @@
       },
       methods:{
           apply: function(){
-              axios.post("/api/loansType",{name: this.name, maxAmount: this.maxAmount, payment: this.payment})
+              axios.post("/api/loansType",{name: this.name, maxAmount: this.maxAmount, payments: this.payments})
               .then(response => {
 
                  console.log("creado");
+                 console.log(payments);
               })
               .catch((error) =>{
         //          this.errorMsg = error.response.data;
                   this.errorToats.show();
               })
+          },
+          addPayment: function(){
+            this.payments.push(this.payment);
+
+
+
           },
           signOut: function(){
               axios.post('/api/logout')
