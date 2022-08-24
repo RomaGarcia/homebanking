@@ -88,7 +88,15 @@ public class LoanRestController {
     @Transactional
     @PostMapping ("/api/loansType")
     public ResponseEntity<Object> createLoan(@RequestBody LoanCreateDTO loanCreateDTO)       {
-
+        if (loanCreateDTO.getName()==null){
+            return new ResponseEntity<>("Debe selecionar un nombre para el tipo de prestamo", HttpStatus.FORBIDDEN);
+        }
+        if (loanCreateDTO.getMaxAmount()<=0){
+            return new ResponseEntity<>("Debe seleccionar un monto maximo positivo", HttpStatus.FORBIDDEN);
+        }
+        if (loanCreateDTO.getPayments().size()==0){
+            return new ResponseEntity<>("Debe agregar al menos una cuota disponible", HttpStatus.FORBIDDEN);
+        }
         Loan loan= new Loan(loanCreateDTO.getName(), loanCreateDTO.getMaxAmount(), loanCreateDTO.getPayments());
         loanRepository.save(loan);
         return new ResponseEntity<>(HttpStatus.CREATED);

@@ -11,15 +11,14 @@
           fees: []
       },
       methods:{
-          apply: function(){
+          apply: function(event){
               axios.post("/api/loansType",{name: this.name, maxAmount: this.maxAmount, payments: this.payments})
               .then(response => {
+                window.location.reload();
 
-                 console.log("creado");
-                 console.log(payments);
               })
               .catch((error) =>{
-        //          this.errorMsg = error.response.data;
+                  this.errorMsg = error.response.data;
                   this.errorToats.show();
               })
           },
@@ -47,7 +46,7 @@
           this.errorToats = new bootstrap.Toast(document.getElementById('danger-toast'));
           this.modal = new bootstrap.Modal(document.getElementById('confirModal'));
           this.okmodal = new bootstrap.Modal(document.getElementById('okModal'));
-          this.feesmodal = new bootstrap.Modal(document.getElementById('feesModal'));
+
 
       }
   }

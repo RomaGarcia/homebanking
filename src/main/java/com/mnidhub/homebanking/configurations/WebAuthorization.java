@@ -22,14 +22,14 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/web/index.html").permitAll()
-                .antMatchers("/web/indexAdmin.html","/web/loanAdmin.html","/api/loansType").hasAuthority("ADMIN")
+                .antMatchers("/web/indexAdmin.html", "/web/loanAdmin.html", "/api/loansType").hasAuthority("ADMIN")
                 .antMatchers("/web/css/**", "/web/img/**", "/web/js/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/api/clients").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/**").hasAuthority("CLIENT")
                 .antMatchers("/api/clients/current/accounts").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST,"/api/clients/current/cards").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST,"/api/transactions").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/cards").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/transactions").hasAuthority("CLIENT")
                 .antMatchers("/api/loans").hasAuthority("CLIENT");
 
         http.formLogin().usernameParameter("email")
