@@ -2,7 +2,9 @@ package com.mnidhub.homebanking.controllers;
 
 import com.mnidhub.homebanking.dtos.ClientDTO;
 import com.mnidhub.homebanking.dtos.LoanApplicationDTO;
+
 import com.mnidhub.homebanking.dtos.LoanCreateDTO;
+
 import com.mnidhub.homebanking.dtos.LoanDTO;
 import com.mnidhub.homebanking.models.*;
 import com.mnidhub.homebanking.repositories.*;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -85,6 +89,7 @@ public class LoanRestController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+
     @Transactional
     @PostMapping ("/api/loansType")
     public ResponseEntity<Object> createLoan(@RequestBody LoanCreateDTO loanCreateDTO)       {
@@ -101,6 +106,7 @@ public class LoanRestController {
         loanRepository.save(loan);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
     @RequestMapping("/api/loans")
     public List<LoanDTO> getAll(){
         return loanRepository.findAll().stream().map(LoanDTO::new).collect(toList());
