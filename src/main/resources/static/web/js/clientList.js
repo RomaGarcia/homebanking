@@ -18,6 +18,20 @@ var app = new Vue({
                     this.errorToats.show();
                 })
         },
+        /*setStatus: function(event){
+          const urlParams = new URLSearchParams(window.location.search);
+          const id = urlParams.get('id');
+
+          console.log(id);
+          axios.post(`api/clients/${event.target.id}`)
+            .then(response => {
+            window.location.reload();
+          })
+            .catch((error) =>{
+                this.errorMsg = error.response.data;
+                this.errorToats.show();
+              })
+         },*/
         formatDate: function(date){
             return new Date(date).toLocaleDateString('en-gb');
         },

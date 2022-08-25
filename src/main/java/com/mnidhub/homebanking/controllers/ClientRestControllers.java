@@ -19,7 +19,7 @@ import static com.mnidhub.homebanking.utils.CardUtils.getRandomNumber;
 import static java.util.stream.Collectors.toList;
 
 @RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 public class ClientRestControllers {
 
     @Autowired
@@ -29,24 +29,24 @@ public class ClientRestControllers {
     @Autowired
     public AccountRepository repoAccount;
 
-    @RequestMapping("/clients")
+    @RequestMapping("/api/clients")
     public List<ClientDTO> getAll(){
         return repo.findAll().stream().map(ClientDTO::new).collect(toList());
     }
 
-    @RequestMapping("/clients/{id}")
+    @RequestMapping("/api/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
         //return new ClientDTO((repo.findById(id).get()));
         return repo.findById(id).map(ClientDTO::new).orElse(null);
     }
 
-    @GetMapping("/clients/current")
+    @GetMapping("/api/clients/current")
     public ClientDTO getClient(Authentication authentication){
         Client client = this.repo.findByEmail(authentication.getName());
         return new ClientDTO(client);
     }
 
-    @PostMapping("/clients")
+    @PostMapping("/api/clients")
     public ResponseEntity<Object> register(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password) {
 
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
@@ -72,5 +72,13 @@ public class ClientRestControllers {
     /*public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }*/
+
+    @PostMapping("/web/api/clients/{id}")
+    public void setStatus(@PathVariable Long id){
+        Client client = repo.findById(id).get();
+        client.setStatus(!client.isStatus());
+        repo.save(client);
+    }
+
 
 }
