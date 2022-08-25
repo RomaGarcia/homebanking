@@ -11,6 +11,8 @@ public class ClientDTO {
     private String firstName;
     private String lastName;
     private String email;
+
+    private boolean status;
     private Set<AccountDTO> accounts;
     private Set<ClientLoanDTO> clientLoans;
     private Set<CardDTO> cards;
@@ -23,6 +25,7 @@ public class ClientDTO {
         this.firstName = client.getFirstName();
         this.lastName = client.getLastName();
         this.email = client.getEmail();
+        this.status = client.isStatus();
         this.accounts = client.getAccounts().stream().map(account -> new AccountDTO(account)).collect(Collectors.toSet());
         this.clientLoans = client.getClientLoans().stream().map(clientLoan -> new ClientLoanDTO(clientLoan)).collect(Collectors.toSet());
         this.cards = client.getCards().stream().map(card -> new CardDTO(card)).collect(Collectors.toSet());
@@ -82,5 +85,13 @@ public class ClientDTO {
 
     public void setClientLoans(Set<ClientLoanDTO> clientLoans) {
         this.clientLoans = clientLoans;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
