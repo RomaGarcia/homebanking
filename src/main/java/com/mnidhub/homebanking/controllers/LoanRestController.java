@@ -91,7 +91,7 @@ public class LoanRestController {
         if (loanCreateDTO.getName()==null){
             return new ResponseEntity<>("Debe selecionar un nombre para el tipo de prestamo", HttpStatus.FORBIDDEN);
         }
-        if (loanCreateDTO.getMaxAmount()<=0){
+        if (loanCreateDTO.getMaxAmount()<=0 || loanCreateDTO.getMaxAmount()==null){
             return new ResponseEntity<>("Debe seleccionar un monto maximo positivo", HttpStatus.FORBIDDEN);
         }
         if (loanCreateDTO.getPayments().size()==0){

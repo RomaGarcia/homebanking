@@ -12,6 +12,7 @@
       },
       methods:{
           apply: function(event){
+              event.preventDefault();
               axios.post("/api/loansType",{name: this.name, maxAmount: this.maxAmount, payments: this.payments})
               .then(response => {
                 window.location.reload();
@@ -40,7 +41,7 @@
          finish: function(){
               window.location.reload();
 
-          },
+          }},
 
       mounted: function(){
           this.errorToats = new bootstrap.Toast(document.getElementById('danger-toast'));
@@ -49,6 +50,6 @@
 
 
       }
-  }
+
 
   })
