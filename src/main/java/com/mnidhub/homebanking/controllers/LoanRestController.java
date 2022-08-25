@@ -2,6 +2,9 @@ package com.mnidhub.homebanking.controllers;
 
 import com.mnidhub.homebanking.dtos.ClientDTO;
 import com.mnidhub.homebanking.dtos.LoanApplicationDTO;
+
+import com.mnidhub.homebanking.dtos.LoanCreateDTO;
+
 import com.mnidhub.homebanking.dtos.LoanDTO;
 import com.mnidhub.homebanking.models.*;
 import com.mnidhub.homebanking.repositories.*;
@@ -13,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+
+import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -80,6 +86,24 @@ public class LoanRestController {
         accountDestino.setBalance(accountDestino.getBalance()+loanApplicationDTO.getAmount());
         accountRepository.save(accountDestino);
 
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+    @Transactional
+    @PostMapping ("/api/loansType")
+    public ResponseEntity<Object> createLoan(@RequestBody LoanCreateDTO loanCreateDTO)       {
+        if (loanCreateDTO.getName()==null){
+            return new ResponseEntity<>("Debe selecionar un nombre para el tipo de prestamo", HttpStatus.FORBIDDEN);
+        }
+        if (loanCreateDTO.getMaxAmount()<=0 || loanCreateDTO.getMaxAmount()==null){
+            return new ResponseEntity<>("Debe seleccionar un monto maximo positivo", HttpStatus.FORBIDDEN);
+        }
+        if (loanCreateDTO.getPayments().size()==0){
+            return new ResponseEntity<>("Debe agregar al menos una cuota disponible", HttpStatus.FORBIDDEN);
+        }
+        Loan loan= new Loan(loanCreateDTO.getName(), loanCreateDTO.getMaxAmount(), loanCreateDTO.getPayments());
+        loanRepository.save(loan);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
