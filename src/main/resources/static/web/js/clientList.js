@@ -18,12 +18,8 @@ var app = new Vue({
                     this.errorToats.show();
                 })
         },
-        /*setStatus: function(event){
-          const urlParams = new URLSearchParams(window.location.search);
-          const id = urlParams.get('id');
-
-          console.log(id);
-          axios.post(`api/clients/${event.target.id}`)
+        setStatus: function(id){
+          axios.post(`/web/api/clients/${id}`)
             .then(response => {
             window.location.reload();
           })
@@ -31,7 +27,7 @@ var app = new Vue({
                 this.errorMsg = error.response.data;
                 this.errorToats.show();
               })
-         },*/
+         },
         formatDate: function(date){
             return new Date(date).toLocaleDateString('en-gb');
         },

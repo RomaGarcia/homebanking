@@ -20,7 +20,7 @@ var app = new Vue({
                     this.errorToats.show();
                 })
         },
-        setStatus: function(event){
+        /*setStatus: function(event){
                    event.preventDefault();
                   const urlParams = new URLSearchParams(window.location.search);
                   const id = urlParams.get('id');
@@ -34,7 +34,7 @@ var app = new Vue({
                         this.errorMsg = error.response.data;
                         this.errorToats.show();
                       })
-                 },
+                 },*/
         formatDate: function(date){
             return new Date(date).toLocaleDateString('en-gb');
         },
