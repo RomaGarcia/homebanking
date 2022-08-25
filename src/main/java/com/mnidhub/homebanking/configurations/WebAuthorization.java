@@ -20,19 +20,21 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
 
-        http.authorizeRequests()
+        http.authorizeRequests()//ORDENAR LOS ACCESOS Y HACERLOS BIEN.
                 .antMatchers("/web/index.html").permitAll()
-
+                .antMatchers("/web/clientList.html").hasAuthority("ADMIN")
                 .antMatchers("/web/indexAdmin.html", "/web/loanAdmin.html", "/api/loansType").hasAuthority("ADMIN")
                 .antMatchers("/web/css/**", "/web/img/**", "/web/js/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/**").hasAuthority("CLIENT")
+                .antMatchers("/**").permitAll()
                 .antMatchers("/api/clients/current/accounts").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST, "/api/clients/current/cards").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST, "/api/transactions").hasAuthority("CLIENT")
 
                 .antMatchers("/api/loans").hasAuthority("CLIENT");
+
+
 
         http.formLogin().usernameParameter("email")
                 .passwordParameter("password")
