@@ -69,7 +69,7 @@
                         <td>{{client.firstName}}</td>
                         <td>{{client.lastName}}</td>
                         <td>{{client.email}}</td>
-                        <td><a v-bind:href="'http://localhost:8080/web/clientList.html?id='+client.id">Bloquear/Desbloquear</a></td>
+                        <td><button v-on:click="setStatus(client.id)">Bloquear/Desbloquear</button></td>
                         <td><a v-bind:href="'http://localhost:8080/web/clientDetail.html?id='+client.id">Detalle</a></td>
                     </tr>
                     </tbody>
